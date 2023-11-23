@@ -25,6 +25,12 @@ const App = () => {
     }
   };
 
+  const reFetchData = () => {
+    setTours([]);
+    setIsLoading(!isLoading);
+    fetchData();
+  };
+
   useEffect(() => {
     fetchData();
   }, []);
@@ -34,7 +40,13 @@ const App = () => {
       {isLoading ? (
         <Loading></Loading>
       ) : (
-        <Tours tours={tours} deleteTour={deleteTour}></Tours>
+        <>
+          <Tours
+            tours={tours}
+            deleteTour={deleteTour}
+            reFetchData={reFetchData}
+          ></Tours>
+        </>
       )}
     </main>
   );
