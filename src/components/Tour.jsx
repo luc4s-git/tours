@@ -1,8 +1,38 @@
 import { useState } from 'react';
 
 export default function Tour({ id, name, info, image, price, deleteTour }) {
-  const [isReadMore, setIsReadMore] = useState(true);
-  const [tourInfo, setTourInfo] = useState(isReadMore && info.slice(0, 200));
+  const [readMore, setReadMore] = useState(true);
+  const [isFull, setIsFull] = useState(false);
+  const [textInfo, setTextInfo] = useState(info);
+
+  const ShowReadMore = () => {
+    return (
+      <>
+        <button
+          type="button"
+          className="info-btn"
+          onClick={() => {
+            setReadMore(!readMore);
+            setIsFull(!isFull);
+          }}
+        >
+          read more
+        </button>
+      </>
+    );
+  };
+
+  const ShowText = () => {
+    if (!isFull) {
+      setTextInfo(info.slice(0, 200));
+    }
+
+    if (isFull) {
+      setTextInfo(info);
+    }
+
+    return <p>{textInfo}</p>;
+  };
 
   return (
     <article className="single-tour">
@@ -10,17 +40,8 @@ export default function Tour({ id, name, info, image, price, deleteTour }) {
       <span className="tour-price">${price}</span>
       <div className="tour-info">
         <h5>{name}</h5>
-        <p>{tourInfo}</p>
-        <button
-          type="button"
-          className="info-btn"
-          onClick={() => {
-            setTourInfo(info);
-            setIsReadMore(false);
-          }}
-        >
-          read more
-        </button>
+        <ShowText />
+        <ShowReadMore />
         <button
           type="buton"
           className="btn btn-block delete-btn"
