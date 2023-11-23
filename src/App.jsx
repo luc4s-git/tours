@@ -15,6 +15,7 @@ const App = () => {
   };
 
   const fetchData = async () => {
+    setIsLoading(true);
     try {
       const response = await fetch(url);
       const data = await response.json();
@@ -35,6 +36,14 @@ const App = () => {
   useEffect(() => {
     fetchData();
   }, []);
+
+  if (isLoading) {
+    return (
+      <main>
+        <Loading></Loading>
+      </main>
+    );
+  }
 
   if (tours.length === 0) {
     return (
@@ -57,19 +66,14 @@ const App = () => {
       </main>
     );
   }
+
   return (
     <main>
-      {isLoading ? (
-        <Loading></Loading>
-      ) : (
-        <>
-          <Tours
-            tours={tours}
-            deleteTour={deleteTour}
-            reFetchData={reFetchData}
-          ></Tours>
-        </>
-      )}
+      <Tours
+        tours={tours}
+        deleteTour={deleteTour}
+        reFetchData={reFetchData}
+      ></Tours>
     </main>
   );
 };
