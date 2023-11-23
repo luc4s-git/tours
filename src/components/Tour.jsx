@@ -6,7 +6,6 @@ export default function Tour({ name, info, image, price }) {
       <div className="tour-info">
         <h5>{name}</h5>
         <p>{info}</p>
-        <button className="info-btn delete-btn">not interested</button>
       </div>
     </div>
   );

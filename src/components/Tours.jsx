@@ -8,7 +8,7 @@ export default function Tours({ data }) {
 
   const toursMapping = tours.map((tour) => {
     return (
-      <>
+      <div className="single-tour" key={tour.id}>
         <Tour
           key={tour.id}
           name={tour.name}
@@ -16,7 +16,7 @@ export default function Tours({ data }) {
           image={tour.image}
           price={tour.price}
         ></Tour>
-      </>
+      </div>
     );
   });
 
